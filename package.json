@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Simple app to learn AngularJS",
   "main": "index.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nikolay-borzov/angularjs-study-app.git"
+  },
   "scripts": {
     "build": "npm run build:dev",
     "prebuild:dev": "npm run clean:dev",
