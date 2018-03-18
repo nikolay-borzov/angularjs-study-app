@@ -1,4 +1,6 @@
-exports.config = {
+import { Config } from 'protractor';
+
+export let config: Config = {
   allScriptsTimeout: 11000,
 
   specs: ['*.spec.js'],

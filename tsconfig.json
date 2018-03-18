@@ -3,9 +3,8 @@
     "sourceMap": true,
     "noImplicitAny": true,
     "skipLibCheck": true,
-    "lib": [
-      "es6",
-      "dom"
-    ]
-  }
+    "moduleResolution": "node",
+    "lib": ["es6", "dom"]
+  },
+  "exclude": ["node_modules"]
 }

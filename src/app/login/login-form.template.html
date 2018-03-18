@@ -1,0 +1,38 @@
+<script type="text/ng-template" id="error-messages-generic">
+  <div ng-message="required">
+    Required
+  </div>
+</script>
+
+<md-content ng-if="$ctrl.errorText" md-colors="{background: 'default-warn'}" layout-padding>
+  {{ $ctrl.errorText }}
+</md-content>
+<md-content layout="column" layout-padding>
+  <form name="form" novalidate ng-submit="$ctrl.submit()">
+    <md-input-container class="md-block">
+      <label>Login</label>
+      <input name="login" ng-model="$ctrl.model.login" required pattern="{{$ctrl.validation.login.pattern}}">
+      <div ng-messages="form.login.$error">
+        <div ng-message="pattern">
+          Only latin characters
+        </div>
+        <div ng-messages-include="error-messages-generic"></div>
+      </div>
+    </md-input-container>
+
+    <md-input-container class="md-block">
+      <label>Password</label>
+      <input name="password" ng-model="$ctrl.model.password" type="password" required pattern="{{$ctrl.validation.password.pattern}}">
+      <div ng-messages="form.password.$error">
+        <div ng-message="pattern">
+          Only latin characters and numbers
+        </div>
+        <div ng-messages-include="error-messages-generic"></div>
+      </div>
+    </md-input-container>
+
+    <div>
+      <md-button type="submit" ng-disabled="form.$invalid" class="md-raised md-primary">Sign in</md-button>
+    </div>
+  </form>
+</md-content>

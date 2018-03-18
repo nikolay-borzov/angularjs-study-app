@@ -1,17 +1,29 @@
 // Temporary, until https://github.com/Microsoft/TypeScript/issues/10178 is implemented
 import * as angular from 'angular';
 
-// Import Module Components
-import { App } from './components/app/app.component';
+import { IAppConfig } from './interfaces/app-config';
 
-// Import Module Configuration
+// Components
+import { App } from './components/app/app.component';
+import { LoginWidget } from './components/login-widget/login-widget.component';
+
+// Services
+import { AuthService } from './services/auth.service';
+
+// Configuration
 import { configuration } from './core.configuration';
 import { routing } from './core.routes';
 
 export default angular
-  .module('application.core', ['ui.router'])
-  // Register Module Components
+  .module('app.core', ['ui.router'])
+  .constant('appConfig', {
+    apiUrl: 'http://localhost:3000'
+  } as IAppConfig)
+  // Components
+  .component(LoginWidget.selector, LoginWidget)
   .component(App.selector, App)
-  // Register Module Configuration
+  // Services
+  .service(AuthService.selector, AuthService)
+  // Configuration
   .config(configuration)
   .config(routing).name;

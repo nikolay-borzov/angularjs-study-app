@@ -1,11 +1,17 @@
-<header>
-  HEADER
-</header>
+<md-toolbar layout="row">
+  <div class="md-toolbar-tools">
+    <h1 flex md-truncate class="md-headline">HEADER</h1>
 
-<div class="app" ui-view>
+    <login-widget></login-widget>
+  </div>
 
-</div>
+</md-toolbar>
 
-<footer>
-  FOOTER
-</footer>
+<md-content ui-view flex="grow" layout="column" layout-align="center stretch" class="md-primary hue-3">
+
+</md-content>
+<!--<div ui-view flex="grow" layout="column" layout-align="center stretch" class="md-primary hue-3"></div>-->
+
+<md-toolbar layout="row" layout-align="center center" class="md-subhead">
+  &copy; Copyright 2017, FakeStudyCorp. All rights reserved.
+</md-toolbar>

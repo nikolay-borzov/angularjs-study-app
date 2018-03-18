@@ -15,33 +15,43 @@
     "build:prd": "webpack --config webpack-prd.config.js",
     "clean:dev": "rimraf .tmp",
     "clean:prd": "rimraf public",
-    "start": "npm run serve:dev",
+    "json-server": "json-server --watch db.json",
+    "start": "run-p serve:dev json-server",
     "serve:dev": "webpack-dev-server --config webpack-dev.config.js",
     "preserve:prd": "npm run build:prd",
     "serve:prd": "http-server",
     "test": "karma start karma.config.js",
-    "test:coverage": "remap-istanbul -i build/coverage/coverage.json -o build/coverage/report -t html",
-    "test:coveralls": "remap-istanbul -i build/coverage/coverage.json -o build/coverage/lcov.info -t lcovonly",
-    "test:coveralls:push": "cat ./build/coverage/lcov.info | ./node_modules/.bin/coveralls",
+    "test:coverage":
+      "remap-istanbul -i build/coverage/coverage.json -o build/coverage/report -t html",
+    "test:coveralls":
+      "remap-istanbul -i build/coverage/coverage.json -o build/coverage/lcov.info -t lcovonly",
+    "test:coveralls:push":
+      "cat ./build/coverage/lcov.info | ./node_modules/.bin/coveralls",
     "preupdate-webdriver": "npm install",
     "update-webdriver": "webdriver-manager update",
-    "preprotractor": "npm run update-webdriver",
-    "protractor": "protractor e2e-tests/protractor.conf.js"
+    "tmp": "npm run update-webdriver &&",
+    "preprotractor": "tsc -p e2e-tests",
+    "protractor": "protractor e2e-tests/tmp/protractor.conf.js"
   },
-  "keywords": [
-    "study-app"
-  ],
+  "keywords": ["study-app"],
   "author": "Nikolay Borzov <nikolay.n.borzov@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "@types/angular": "^1.6.39",
     "@types/angular-mocks": "^1.5.11",
+    "@types/angular-resource": "^1.5.14",
     "@types/angular-ui-router": "^1.1.40",
     "@types/core-js": "^0.9.43",
     "@types/jasmine": "^2.8.2",
+    "@types/jasminewd2": "^2.0.3",
     "@types/node": "^9.3.0",
     "@types/webpack-env": "^1.13.3",
+    "angular-animate": "^1.6.9",
+    "angular-aria": "^1.6.9",
+    "angular-material": "^1.1.7",
+    "angular-messages": "^1.6.9",
     "angular-mocks": "^1.6.7",
+    "angular-resource": "^1.6.9",
     "awesome-typescript-loader": "^4.0.1",
     "core-js": "^2.5.3",
     "coveralls": "^3.0.0",
@@ -53,6 +63,7 @@
     "http-server": "^0.11.0",
     "istanbul-instrumenter-loader": "^3.0.0",
     "jasmine-core": "^3.0.0",
+    "json-server": "^0.12.1",
     "karma": "^2.0.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-coverage": "^1.1.1",
@@ -62,6 +73,7 @@
     "karma-webpack": "^2.0.9",
     "ng-annotate-loader": "^0.6.1",
     "node-sass": "^4.7.2",
+    "npm-run-all": "^4.1.2",
     "prettier": "^1.11.1",
     "protractor": "^5.3.0",
     "remap-istanbul": "^0.10.0",
@@ -80,8 +92,8 @@
     "webpack-merge": "^4.1.1"
   },
   "dependencies": {
+    "@types/angular-material": "^1.1.58",
     "@uirouter/angularjs": "^1.0.15",
-    "angular": "^1.6.7",
-    "bootstrap": "^3.3.7"
+    "angular": "^1.6.7"
   }
 }

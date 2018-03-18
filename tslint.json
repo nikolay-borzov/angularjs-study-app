@@ -21,9 +21,9 @@
         "order": [
           "public-static-field",
           "public-instance-field",
-          "public-constructor",
           "private-static-field",
           "private-instance-field",
+          "public-constructor",
           "private-constructor",
           "public-instance-method",
           "protected-instance-method",
@@ -59,7 +59,6 @@
     "triple-equals": [true, "allow-null-check"],
     "typedef": [
       true,
-      "call-signature",
       "parameter",
       "arrow-parameter",
       "property-declaration",

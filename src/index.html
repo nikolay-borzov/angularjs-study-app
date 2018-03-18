@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="application.bootstrap">
+<html lang="en" ng-app="app.bootstrap">
 
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
+  <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,700'>
   <title>
     <%= htmlWebpackPlugin.options.title %>
   </title>
 </head>
 
 
-<body>
-  <app>Loading</app>
+<body ng-cloak>
+  <app id="app-container" flex layout="column">Loading</app>
 </body>
 
 </html>
