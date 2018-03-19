@@ -16,8 +16,5 @@ export default angular
   .component(LoginForm.selector, LoginForm)
   // Pages
   .component(LoginPage.selector, LoginPage)
-
-  // Services
-
   // Routes
   .config(routing).name;

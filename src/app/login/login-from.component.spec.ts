@@ -12,7 +12,6 @@ describe('LoginForm component', () => {
   };
 
   beforeEach(() => {
-    // TODO: Move to testUtils.ts?
     angular.module('app', []).component(LoginForm.selector, LoginForm);
     angular.mock.module('app');
   });

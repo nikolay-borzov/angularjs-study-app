@@ -7,8 +7,10 @@
     "declaration": false,
     "removeComments": false,
     "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true,
     "outDir": "tmp",
-    "types": ["jasmine", "node"]
+    "lib": ["es6"],
+    "types": ["jasmine", "jasminewd2", "node"]
   },
   "exclude": ["node_modules"]
 }

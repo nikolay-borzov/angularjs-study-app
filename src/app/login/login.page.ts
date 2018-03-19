@@ -15,10 +15,10 @@ class LoginPageController {
   logIn({ login, password }: ILoginModel) {
     this.authService
       .logIn(login, password)
-      .then((response: any) => {
+      .then(() => {
         this.$state.go('courses');
       })
-      .catch((reason: any) => {
+      .catch(() => {
         this.loginError = 'Wrong login or password';
       });
   }

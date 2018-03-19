@@ -29,7 +29,6 @@
       "cat ./build/coverage/lcov.info | ./node_modules/.bin/coveralls",
     "preupdate-webdriver": "npm install",
     "update-webdriver": "webdriver-manager update",
-    "tmp": "npm run update-webdriver &&",
     "preprotractor": "tsc -p e2e-tests",
     "protractor": "protractor e2e-tests/tmp/protractor.conf.js"
   },
