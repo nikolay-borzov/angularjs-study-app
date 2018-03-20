@@ -4,6 +4,10 @@ import { ApiError } from '../errors/api-error';
 
 export class AuthService {
   static selector = 'authService';
+  static events = {
+    logIn: 'auth.logIn',
+    logOut: 'auth.logOut'
+  };
 
   private storage = {
     get<T>(key: string): T | null {
@@ -21,9 +25,12 @@ export class AuthService {
   private userStorageKey = 'user';
   private apiUrl: string;
 
-  constructor(private $http: ng.IHttpService, appConfig: IAppConfig) {
+  constructor(
+    private $http: ng.IHttpService,
+    appConfig: IAppConfig,
+    private $rootScope: ng.IRootScopeService
+  ) {
     'ngInject';
-    // TODO: Remove ngResourse
     this.apiUrl = `${appConfig.apiUrl}/users`;
   }
 
@@ -49,7 +56,19 @@ export class AuthService {
   }
 
   logOut() {
-    return this.setUser(null);
+    // Simulate async request
+    return new Promise((resolve: any) => {
+      this.setUser(null);
+      resolve();
+    });
+  }
+
+  isAuthenticated() {
+    return !!this.getUser();
+  }
+
+  getLoggedUser() {
+    return this.getUser();
   }
 
   private getUser() {
@@ -59,8 +78,10 @@ export class AuthService {
   private setUser(user: User) {
     if (user) {
       this.storage.set(this.userStorageKey, user);
+      this.$rootScope.$broadcast(AuthService.events.logIn, user);
     } else {
       this.storage.remove(this.userStorageKey);
+      this.$rootScope.$broadcast(AuthService.events.logOut);
     }
   }
 }

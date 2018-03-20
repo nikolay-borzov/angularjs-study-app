@@ -10,23 +10,8 @@ describe('LoginPage', () => {
   let $q: ng.IQService;
   let $rootScope: ng.IRootScopeService;
 
-  let authService = {
-    logIn: jasmine.createSpy('logIn').and.callFake((login: string) => {
-      const deferred = $q.defer();
-
-      if (login === 'login') {
-        deferred.resolve();
-      } else {
-        deferred.reject();
-      }
-
-      return deferred.promise;
-    })
-  };
-
-  let $state = {
-    go: jasmine.createSpy('go')
-  };
+  let authService = jasmine.createSpyObj('authService', ['logIn', 'logOut']);
+  let $state = jasmine.createSpyObj('$state', ['go', 'reload']);
 
   beforeEach(() => {
     angular.module('app', []).component(LoginPage.selector, LoginPage);
@@ -56,33 +41,56 @@ describe('LoginPage', () => {
     expect(ctrl).toBeDefined();
   });
 
-  it('should call `authService.logIn` on form log in', () => {
-    const params = { login: 'login', password: 'passsword' };
+  describe('on log in', () => {
+    beforeEach(() => {
+      authService.logIn.and.returnValue($q.resolve());
+    });
 
-    ctrl.logIn(params);
+    it('should call `authService.logIn`', () => {
+      const params = { login: 'login', password: 'passsword' };
 
-    expect(authService.logIn).toHaveBeenCalledWith(
-      params.login,
-      params.password
-    );
+      ctrl.logIn(params);
+
+      expect(authService.logIn).toHaveBeenCalledWith(
+        params.login,
+        params.password
+      );
+    });
+
+    it('should redirect to courses on success', () => {
+      ctrl.logIn({ login: 'login' });
+      $rootScope.$apply();
+
+      expect($state.go).toHaveBeenCalledWith('courses');
+    });
+
+    it('should set `loginError` on fail ', () => {
+      authService.logIn.and.returnValue($q.reject());
+
+      ctrl.logIn({ login: 'wronglogin' });
+      $rootScope.$apply();
+
+      expect($state.go).not.toHaveBeenCalled();
+      expect(ctrl.loginError).toBeTruthy();
+    });
   });
 
-  it('should redirect to courses on success ', () => {
-    const params = { login: 'login' };
+  describe('on log out', () => {
+    beforeEach(() => {
+      authService.logOut.and.returnValue($q.resolve());
+    });
 
-    ctrl.logIn(params);
-    $rootScope.$apply();
+    it('should call `authService.logOut`', () => {
+      ctrl.logOut();
 
-    expect($state.go).toHaveBeenCalledWith('courses');
-  });
+      expect(authService.logOut).toHaveBeenCalled();
+    });
 
-  it('should set `loginError` on fail ', () => {
-    const params = { login: 'wronglogin' };
+    it('should reload page', () => {
+      ctrl.logOut();
+      $rootScope.$apply();
 
-    ctrl.logIn(params);
-    $rootScope.$apply();
-
-    expect($state.go).not.toHaveBeenCalled();
-    expect(ctrl.loginError).toBeTruthy();
+      expect($state.reload).toHaveBeenCalled();
+    });
   });
 });

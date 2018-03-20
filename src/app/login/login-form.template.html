@@ -7,8 +7,9 @@
 <md-content ng-if="$ctrl.errorText" md-colors="{background: 'default-warn'}" layout-padding>
   {{ $ctrl.errorText }}
 </md-content>
+
 <md-content layout="column" layout-padding>
-  <form name="form" novalidate ng-submit="$ctrl.submit()">
+  <form name="form" ng-if="!$ctrl.loggedAs" novalidate ng-submit="$ctrl.submit()">
     <md-input-container class="md-block">
       <label>Login</label>
       <input name="login" ng-model="$ctrl.model.login" required pattern="{{$ctrl.validation.login.pattern}}">
@@ -35,4 +36,14 @@
       <md-button type="submit" ng-disabled="form.$invalid" class="md-raised md-primary">Sign in</md-button>
     </div>
   </form>
+
+  <div ng-if="$ctrl.loggedAs">
+    <div layout-margin>
+      Logged as:
+      <strong>{{ $ctrl.loggedAs.name}}</strong>
+    </div>
+    <div layout-margin>
+      <md-button ng-click="$ctrl.logOut()" type="button" class="md-raised md-primary">Sign out</md-button>
+    </div>
+  </div>
 </md-content>

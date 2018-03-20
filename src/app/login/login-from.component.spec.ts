@@ -8,6 +8,7 @@ describe('LoginForm component', () => {
 
   const bindings = {
     onSubmit: jasmine.createSpy('onSubmit'),
+    onLogOut: jasmine.createSpy('onLogOut'),
     errorText: ''
   };
 
@@ -17,7 +18,7 @@ describe('LoginForm component', () => {
   });
 
   beforeEach(() =>
-    angular.mock.inject(($componentController: ng.IControllerService) => {
+    inject(($componentController: ng.IControllerService) => {
       ctrl = $componentController(LoginForm.selector, {}, bindings);
     })
   );
@@ -33,6 +34,12 @@ describe('LoginForm component', () => {
     ctrl.submit();
 
     expect(bindings.onSubmit).toHaveBeenCalledWith({ model: model });
+  });
+
+  it('should call `onLogout` binding on sign out', () => {
+    ctrl.logOut();
+
+    expect(bindings.onLogOut).toHaveBeenCalled();
   });
 
   it('should clear password field when `errorText` is set', () => {

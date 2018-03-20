@@ -46,7 +46,7 @@ describe('Login page', () => {
       expect(po.errorMessage.isPresent()).toBeTruthy();
     });
 
-    fit('should redirect to courses page after successfull login', () => {
+    it('should redirect to courses page after successfull login', () => {
       po.setLogin('q');
       po.setPassword('q');
 
@@ -57,10 +57,6 @@ describe('Login page', () => {
           return url.endsWith('/courses');
         });
       }, 10000);
-      /*
-      browser.wait(() => {
-        expect(browser.driver.getCurrentUrl()).toMatch('/#/courses');
-      }, 2000);*/
     });
 
     describe('validation', () => {

@@ -1,6 +1,10 @@
 import { ILoginModel } from './login-model';
+import { User } from '../core/entities/user';
 
 class LoginFormController {
+  errorText: string;
+  loggedAs: User;
+
   model = {
     login: '',
     password: ''
@@ -15,9 +19,9 @@ class LoginFormController {
     }
   };
 
-  errorText: string;
-
+  // Events
   onSubmit: ($event: { model: ILoginModel }) => void;
+  onLogOut: () => void;
 
   $onChanges() {
     if (this.errorText) {
@@ -28,6 +32,10 @@ class LoginFormController {
   submit() {
     this.onSubmit({ model: this.model });
   }
+
+  logOut() {
+    this.onLogOut();
+  }
 }
 
 export class LoginForm implements ng.IComponentOptions {
@@ -36,6 +44,8 @@ export class LoginForm implements ng.IComponentOptions {
   static template = require('./login-form.template.html');
   static bindings = {
     onSubmit: '&',
-    errorText: '<'
+    onLogOut: '&',
+    errorText: '<',
+    loggedAs: '<'
   };
 }

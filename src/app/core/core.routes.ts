@@ -1,4 +1,5 @@
 import { App } from './components/app/app.component';
+import { States } from '../core/enums/route-states';
 
 export const routing = (
   $stateProvider: ng.ui.IStateProvider,
@@ -7,7 +8,7 @@ export const routing = (
   'ngInject';
   $stateProvider.state({
     name: 'app',
-    redirectTo: 'courses',
+    redirectTo: States.Courses,
     component: App.selector
   });
   // TODO: Set not found page

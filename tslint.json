@@ -7,7 +7,7 @@
   "rules": {
     "ban": [true, ["_", "extend"], ["_", "isNull"], ["_", "isDefined"]],
     "class-name": true,
-    "comment-format": [true, "check-space", "check-uppercase"],
+    "comment-format": [true, "check-space"],
     "curly": true,
     "eofline": true,
     "forin": true,
@@ -55,7 +55,7 @@
       "check-whitespace"
     ],
     "radix": true,
-    "semicolon": true,
+    "semicolon": [true, "always", "ignore-bound-class-methods"],
     "triple-equals": [true, "allow-null-check"],
     "typedef": [
       true,
