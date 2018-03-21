@@ -1,7 +1,11 @@
+import * as angular from 'angular';
+import '@uirouter/angularjs';
+
 describe('login route', () => {
   let $state: ng.ui.IStateService;
   let $location: ng.ILocationService;
-  let $httpBackend: ng.IHttpBackendService;
+  let $rootScope: ng.IRootScopeService;
+  let $injector: ng.auto.IInjectorService;
 
   let authService = jasmine.createSpyObj('authService', ['getLoggedUser']);
 
@@ -9,32 +13,45 @@ describe('login route', () => {
     $provide.factory('authService', () => authService);
   }
 
-  function injectServices($injector: ng.auto.IInjectorService) {
-    $state = $injector.get('$state');
-    $location = $injector.get('$location');
-    $httpBackend = $injector.get('$httpBackend');
+  function goToLoginPage() {
+    $location.url('/login');
+    $rootScope.$digest();
   }
 
-  // function setUp() {}
-
-  function goTo(url: string) {
-    $location.url(url);
-    $httpBackend.flush();
-  }
-
-  beforeEach(function() {
-    angular.module('app', ['ui.router'], mockServices);
-    angular.mock.module('app');
-    inject(injectServices);
-    // setUp();
+  beforeEach(() => {
+    angular.mock.module('app.login', mockServices);
   });
 
-  fit('should request logged user', () => {
-    authService.getLoggedUser.and.returnValue({ name: 'John Doe' });
+  beforeEach(
+    inject(
+      (
+        _$state_: ng.ui.IStateService,
+        _$location_: ng.ILocationService,
+        _$rootScope_: ng.IRootScopeService,
+        _$injector_: ng.auto.IInjectorService
+      ) => {
+        $state = _$state_;
+        $location = _$location_;
+        $rootScope = _$rootScope_;
+        $injector = _$injector_;
+      }
+    )
+  );
 
-    goTo('/login');
+  it('should navigate to `login` state', () => {
+    goToLoginPage();
 
-    expect(authService.getLoggedUser).toHaveBeenCalled();
     expect($state.current.name).toBe('login');
+  });
+
+  it('should request logged user', () => {
+    const user = { name: 'John Doe' };
+    authService.getLoggedUser.and.returnValue(user);
+
+    goToLoginPage();
+
+    expect($state.current.resolve.loggedAs).toBeDefined();
+    expect(authService.getLoggedUser).toHaveBeenCalled();
+    expect($injector.invoke($state.current.resolve.loggedAs)).toBe(user);
   });
 });
