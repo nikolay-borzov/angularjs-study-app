@@ -7,7 +7,7 @@ module.exports = webpackMerge(commonConfig, {
   devtool: 'cheap-module-source-map',
 
   devServer: {
-    contentBase: path.join(__dirname, '.tmp'),
+    contentBase: [path.join(__dirname, '.tmp'), path.join(__dirname, 'src/')],
     compress: true,
     port: 9000
   },

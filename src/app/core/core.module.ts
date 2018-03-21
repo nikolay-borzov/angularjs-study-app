@@ -9,6 +9,10 @@ import { LoginWidget } from './components/login-widget/login-widget.component';
 
 // Services
 import { AuthService } from './services/auth.service';
+import { CoursesService } from './services/courses.service';
+
+// Filters
+import durationFilter from './filters/duration.filter';
 
 // Configuration
 import { configuration } from './core.configuration';
@@ -24,6 +28,9 @@ export default angular
   .component(App.selector, App)
   // Services
   .service(AuthService.selector, AuthService)
+  .service(CoursesService.selector, CoursesService)
+  // Filters
+  .filter(durationFilter.selector, durationFilter.factory)
   // Configuration
   .config(configuration)
   .config(routing).name;

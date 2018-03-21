@@ -12,10 +12,40 @@
   height: 100%;
 }
 
+/* Expand component container */
+#content > * {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 100%;
+}
+
 #login-page {
   margin: 0 auto;
+  display: flex;
+  align-items: center;
 }
 
 .hint {
   color: rgba(255, 255, 255, 0.5);
+}
+
+.toolbar-input-container {
+  margin: 0;
+}
+
+.toolbar-input-container .md-errors-spacer {
+  display: none;
+}
+
+.card-actions-vertical .md-button + .md-button {
+  margin-top: 18px !important;
+}
+
+.inline-text-block {
+  padding-right: 18px;
+}
+
+/* Fix icon color inside md-toolbar */
+.md-button md-icon {
+  fill: currentColor !important;
 }
