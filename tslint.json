@@ -69,7 +69,7 @@
       true,
       {
         "call-signature": "nospace",
-        "index-signature": "space"
+        "index-signature": "nospace"
       }
     ],
     "variable-name": [

@@ -1,11 +1,12 @@
 import { Course } from '../entities/course';
 import { IAppConfig } from '../interfaces/app-config';
 
+import { extractData } from './service-helpers';
+
 export class CoursesService {
   static selector = 'coursesService';
 
   private apiUrl: string;
-  private apiDelay: 5000;
 
   private filterLastValue: string;
 
@@ -13,7 +14,7 @@ export class CoursesService {
     this.apiUrl = `${appConfig.apiUrl}/courses`;
   }
 
-  getCourses(filterTerm: string = '') {
+  getCourses(filterTerm: string = ''): ng.IPromise<Course[]> {
     this.filterLastValue = filterTerm;
 
     return this.$http
@@ -22,6 +23,12 @@ export class CoursesService {
           name_like: filterTerm
         }
       })
-      .then(({ data: courses }: ng.IHttpResponse<Course[]>) => courses);
+      .then(extractData);
+  }
+
+  getCourse(id: number): ng.IPromise<Course> {
+    const url = `${this.apiUrl}/${id}`;
+    // TODO: handle not existing course
+    return this.$http.get<Course>(url).then(extractData);
   }
 }

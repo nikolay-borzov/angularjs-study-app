@@ -6,6 +6,8 @@ import { CourseUpdatePage } from './update/course-update.page';
 
 import { CoursesService } from '../core/services/courses.service';
 
+import { Course } from '../core/entities/course';
+
 import { States } from '../core/enums/route-states';
 
 export const routing = ($stateProvider: angular.ui.IStateProvider) => {
@@ -16,14 +18,17 @@ export const routing = ($stateProvider: angular.ui.IStateProvider) => {
     url: '/courses?q',
     component: CoursesPage.selector,
     resolve: {
+      title: () => 'Courses',
       courses: function(
-        coursesService: CoursesService,
-        $transition$: Transition
+        $transition$: Transition,
+        coursesService: CoursesService
       ) {
+        'ngInject';
         const filter = $transition$.params().q;
         return coursesService.getCourses(filter);
       },
       filter: function($transition$: Transition) {
+        'ngInject';
         return $transition$.params().q;
       }
     }
@@ -32,7 +37,10 @@ export const routing = ($stateProvider: angular.ui.IStateProvider) => {
   $stateProvider.state({
     name: States.CourseCreate,
     url: '/courses/new',
-    component: CourseCreatePage.selector
+    component: CourseCreatePage.selector,
+    resolve: {
+      title: () => 'Create Course'
+    }
   });
 
   $stateProvider.state({
@@ -40,8 +48,18 @@ export const routing = ($stateProvider: angular.ui.IStateProvider) => {
     url: '/courses/{courseId}',
     component: CourseUpdatePage.selector,
     resolve: {
-      id: function($transition$: Transition): any {
-        return $transition$.params().courseId;
+      course: function(
+        $transition$: Transition,
+        coursesService: CoursesService
+      ) {
+        'ngInject';
+        const id = $transition$.params().courseId;
+        return coursesService.getCourse(id);
+      },
+
+      title: function(course: Course) {
+        'ngInject';
+        return `Edit "${course.name}"`;
       }
     }
   });

@@ -9,11 +9,10 @@ export const routing = ($stateProvider: ng.ui.IStateProvider) => {
     name: States.Login,
     url: '/login',
     component: LoginPage.selector,
-    data: {
-      title: 'Sign in'
-    },
     resolve: {
+      title: () => 'Sign in',
       loggedAs: function(authService: AuthService) {
+        'ngInject';
         return authService.getLoggedUser();
       }
     }

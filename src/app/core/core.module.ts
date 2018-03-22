@@ -5,6 +5,7 @@ import { IAppConfig } from './interfaces/app-config';
 
 // Components
 import { App } from './components/app/app.component';
+import { Breadcrumbs } from './components/breadcrumbs/breadcrumbs.component';
 import { LoginWidget } from './components/login-widget/login-widget.component';
 
 // Services
@@ -24,6 +25,7 @@ export default angular
     apiUrl: 'http://localhost:3000'
   } as IAppConfig)
   // Components
+  .component(Breadcrumbs.selector, Breadcrumbs)
   .component(LoginWidget.selector, LoginWidget)
   .component(App.selector, App)
   // Services

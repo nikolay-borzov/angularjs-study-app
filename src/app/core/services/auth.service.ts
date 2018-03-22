@@ -2,6 +2,8 @@ import { User } from '../entities/user';
 import { IAppConfig } from '../interfaces/app-config';
 import { ApiError } from '../errors/api-error';
 
+import { extractData } from './service-helpers';
+
 export class AuthService {
   static selector = 'authService';
   static events = {
@@ -42,7 +44,8 @@ export class AuthService {
           password
         }
       })
-      .then(({ data: users }: ng.IHttpResponse<User[]>) => {
+      .then(extractData)
+      .then((users: User[]) => {
         if (users.length === 0) {
           throw new ApiError('Wrong login or password', {
             wrongLoginPassword: true
