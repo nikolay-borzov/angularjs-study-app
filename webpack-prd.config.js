@@ -8,7 +8,7 @@ const DESTINATION = path.resolve(__dirname, 'public');
  * Webpack Plugins
  */
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-
+// TODO: Deploy "static" folder
 module.exports = webpackMerge(commonConfig, {
   output: {
     path: DESTINATION,
