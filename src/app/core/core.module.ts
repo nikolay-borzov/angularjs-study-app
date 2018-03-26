@@ -18,6 +18,7 @@ import durationFilter from './filters/duration.filter';
 // Configuration
 import { configuration } from './core.configuration';
 import { routing } from './core.routes';
+import { authHook } from './config-hooks/auth.hook';
 
 export default angular
   .module('app.core', ['ui.router'])
@@ -35,4 +36,5 @@ export default angular
   .filter(durationFilter.selector, durationFilter.factory)
   // Configuration
   .config(configuration)
+  .config(authHook)
   .config(routing).name;

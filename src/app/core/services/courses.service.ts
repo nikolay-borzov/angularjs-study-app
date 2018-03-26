@@ -11,6 +11,7 @@ export class CoursesService {
   private filterLastValue: string;
 
   constructor(private $http: ng.IHttpService, appConfig: IAppConfig) {
+    'ngInject';
     this.apiUrl = `${appConfig.apiUrl}/courses`;
   }
 

@@ -12,7 +12,9 @@ class CoursesPageController {
 
   isLoading = false;
 
-  constructor(private coursesService: CoursesService) {}
+  constructor(private coursesService: CoursesService) {
+    'ngInject';
+  }
 
   onFilterChange() {
     this.isLoading = true;

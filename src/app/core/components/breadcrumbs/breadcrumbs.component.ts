@@ -11,7 +11,9 @@ class BreadcrumbsController implements IEventSubscriber {
   constructor(
     private $rootScope: ng.IRootScopeService & IExpandable,
     private $transitions: TransitionService
-  ) {}
+  ) {
+    'ngInject';
+  }
 
   $onInit() {
     this.offFunctions.push(

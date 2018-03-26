@@ -14,15 +14,27 @@ import './index.scss';
 // Module to be bootstrapped
 import { moduleName as appModule } from './app/app.module';
 
+// For production
+/*
+myApp.config(['$compileProvider', function ($compileProvider) {
+  $compileProvider.debugInfoEnabled(false);
+}]);
+*/
+
 // Bootstrap the application using the imported moduleName
 const bootstrapModuleName = angular
-  .module('app.bootstrap', ['ngMaterial', 'ngMessages', appModule])
+  .module('app.bootstrap', ['ngMaterial', 'ngMessages', 'ngAria', appModule])
   .config(
     (
+      $compileProvider: ng.ICompileProvider,
       $mdIconProvider: ng.material.IIconProvider,
       $mdThemingProvider: ng.material.IThemingProvider
     ) => {
-      // TODO: Consider moving assets to static folder outside src. See also webpack-dev.config.js
+      // Disable comment and css class directives
+      $compileProvider.commentDirectivesEnabled(false);
+      $compileProvider.cssClassDirectivesEnabled(false);
+
+      // Set theme
       $mdIconProvider
         .icon('filter', './assets/icons/filter.svg', 24)
         .icon('add', './assets/icons/add.svg', 24)

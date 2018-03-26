@@ -1,16 +1,19 @@
 import { App } from './components/app/app.component';
 import { States } from '../core/enums/route-states';
+import { UrlService } from '@uirouter/core';
 
 export const routing = (
   $stateProvider: ng.ui.IStateProvider,
-  $urlRouterProvider: ng.ui.IUrlRouterProvider
+  $urlServiceProvider: UrlService
 ) => {
   'ngInject';
+
+  // Root state
   $stateProvider.state({
     name: 'app',
     redirectTo: States.Courses,
     component: App.selector
   });
-  // TODO: Set not found page
-  $urlRouterProvider.otherwise('/login');
+
+  $urlServiceProvider.rules.otherwise({ state: States.Courses });
 };
