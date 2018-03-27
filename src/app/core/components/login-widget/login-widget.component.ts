@@ -1,4 +1,4 @@
-import { Transition, TransitionService } from '@uirouter/core';
+import { Transition, TransitionService, StateService } from '@uirouter/core';
 
 import { States } from '../../enums/route-states';
 import { AuthService } from '../../services/auth.service';
@@ -15,7 +15,7 @@ class LoginWidgetController implements IEventSubscriber {
   constructor(
     private authService: AuthService,
     private $scope: ng.IScope,
-    private $state: ng.ui.IStateService,
+    private $state: StateService,
     private $transitions: TransitionService
   ) {
     'ngInject';
@@ -56,6 +56,7 @@ class LoginWidgetController implements IEventSubscriber {
 
   logOut() {
     this.authService.logOut();
+    this.$state.go(States.Login);
   }
 
   private setUser(user: User) {

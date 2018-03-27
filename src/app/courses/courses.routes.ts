@@ -1,4 +1,5 @@
 import { Transition } from '@uirouter/core';
+import { StateProvider } from '@uirouter/angularjs';
 
 import { CoursesPage } from './list/courses.page';
 import { CourseCreatePage } from './create/course-create.page';
@@ -10,7 +11,7 @@ import { Course } from '../core/entities/course';
 
 import { States } from '../core/enums/route-states';
 
-export const routing = ($stateProvider: angular.ui.IStateProvider) => {
+export const routing = ($stateProvider: StateProvider) => {
   'ngInject';
 
   $stateProvider.state({
@@ -36,8 +37,13 @@ export const routing = ($stateProvider: angular.ui.IStateProvider) => {
 
   $stateProvider.state({
     name: States.CourseCreate,
-    url: '/courses/new',
-    component: CourseCreatePage.selector,
+    parent: States.Courses,
+    url: '/new',
+    views: {
+      '@': {
+        component: CourseCreatePage.selector
+      }
+    },
     resolve: {
       title: () => 'Create Course'
     }
@@ -45,8 +51,13 @@ export const routing = ($stateProvider: angular.ui.IStateProvider) => {
 
   $stateProvider.state({
     name: States.CourseUpdate,
-    url: '/courses/{courseId}',
-    component: CourseUpdatePage.selector,
+    parent: States.Courses,
+    url: '/{courseId}',
+    views: {
+      '@': {
+        component: CourseUpdatePage.selector
+      }
+    },
     resolve: {
       course: function(
         $transition$: Transition,

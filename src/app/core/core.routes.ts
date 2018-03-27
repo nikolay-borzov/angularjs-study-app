@@ -1,9 +1,11 @@
+import { UrlService } from '@uirouter/core';
+import { StateProvider } from '@uirouter/angularjs';
+
 import { App } from './components/app/app.component';
 import { States } from '../core/enums/route-states';
-import { UrlService } from '@uirouter/core';
 
 export const routing = (
-  $stateProvider: ng.ui.IStateProvider,
+  $stateProvider: StateProvider,
   $urlServiceProvider: UrlService
 ) => {
   'ngInject';

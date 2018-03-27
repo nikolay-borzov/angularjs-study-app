@@ -3,10 +3,7 @@ import { TransitionService, Transition, IStateMatch } from '@uirouter/core';
 import { AuthService } from '../services/auth.service';
 import { States } from '../enums/route-states';
 
-export function authHook(
-  $transitionsProvider: TransitionService /*,
-  authService: AuthService*/
-) {
+export function authHook($transitionsProvider: TransitionService) {
   'ngInject';
 
   // All states without skipAuth = true require authentication
@@ -15,8 +12,7 @@ export function authHook(
   };
 
   function redirectToLogin(transition: Transition) {
-    console.log('authHook');
-    const authService = transition.injector().get('authService');
+    const authService = transition.injector().get('authService') as AuthService;
     const $state = transition.router.stateService;
 
     if (!authService.isAuthenticated()) {

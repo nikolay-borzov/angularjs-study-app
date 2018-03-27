@@ -35,9 +35,10 @@ login-page {
   width: 100%;
 }
 
-.hint {
-  color: rgba(255, 255, 255, 0.5);
+.breadcrumbs-link:hover {
+  text-decoration: underline;
 }
+
 
 .toolbar-input-container {
   margin: 0;

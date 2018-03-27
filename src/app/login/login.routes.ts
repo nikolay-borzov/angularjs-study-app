@@ -1,10 +1,11 @@
 import { Transition } from '@uirouter/core';
+import { StateProvider } from '@uirouter/angularjs';
 
 import { LoginPage } from './login.page';
 import { States } from '../core/enums/route-states';
 import { AuthService } from '../core/services/auth.service';
 
-export const routing = ($stateProvider: ng.ui.IStateProvider) => {
+export const routing = ($stateProvider: StateProvider) => {
   'ngInject';
 
   $stateProvider.state({
