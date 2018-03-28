@@ -1,0 +1,5 @@
+<ng-transclude flex ng-hide="$ctrl.isLoading"></ng-transclude>
+
+<div ng-show="$ctrl.isLoading" flex="grow" layout="row" layout-align="center center">
+  <md-progress-circular md-diameter="70"></md-progress-circular>
+</div>

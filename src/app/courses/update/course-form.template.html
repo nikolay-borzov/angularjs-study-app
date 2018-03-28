@@ -1,0 +1,45 @@
+<md-content layout="column" layout-padding>
+  <form name="form" novalidate ng-submit="$ctrl.submit()">
+    <md-input-container class="md-block">
+      <label>Name</label>
+      <input name="name" ng-model="$ctrl.model.name" required>
+      <div ng-messages="form.name.$error">
+        <div ng-messages-include="error-messages-generic"></div>
+      </div>
+    </md-input-container>
+
+    <md-input-container class="md-block">
+      <label>Description</label>
+      <textarea name="description" ng-model="$ctrl.model.description" required></textarea>
+      <div ng-messages="form.description.$error">
+        <div ng-messages-include="error-messages-generic"></div>
+      </div>
+    </md-input-container>
+
+    <md-input-container class="md-block">
+      <label>Date</label>
+      <input name="date" ng-model="$ctrl.model.date" required>
+      <div ng-messages="form.date.$error">
+        <div ng-messages-include="error-messages-generic"></div>
+      </div>
+    </md-input-container>
+
+    <md-input-container layout="row">
+      <div>
+        <label>Duration</label>
+        <input name="duration" ng-model="$ctrl.model.durationMinutes" required>
+        <div ng-messages="form.duration.$error">
+          <div ng-messages-include="error-messages-generic"></div>
+        </div>
+      </div>
+      <div class="input-suffix" flex="grow">
+        {{ $ctrl.model.durationMinutes | duration }}
+      </div>
+    </md-input-container>
+
+    <div>
+      <md-button type="submit" ng-disabled="form.$invalid" class="md-raised md-primary">Save</md-button>
+      <md-button type="button" ng-click="$ctrl.cancel()">Cancel</md-button>
+    </div>
+  </form>
+</md-content>

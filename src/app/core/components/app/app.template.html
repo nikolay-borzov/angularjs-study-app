@@ -9,9 +9,13 @@
 
 </md-toolbar>
 
-<md-content id="content" ui-view flex="grow" layout="column" class="md-primary">
+<md-content ng-hide="$ctrl.isLoading" id="content" ui-view flex="grow" layout="column" class="md-primary">
 
 </md-content>
+
+<div ng-show="$ctrl.isLoading" flex="grow" layout="row" layout-align="center center">
+  <md-progress-circular md-diameter="70"></md-progress-circular>
+</div>
 
 <md-toolbar layout="row" layout-align="center center" class="md-subhead">
   &copy; 2017 FakeStudyCorp. All rights reserved. Kind of

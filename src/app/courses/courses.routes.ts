@@ -6,6 +6,7 @@ import { CourseCreatePage } from './create/course-create.page';
 import { CourseUpdatePage } from './update/course-update.page';
 
 import { CoursesService } from '../core/services/courses.service';
+import { AuthorsService } from '../core/services/authors.service';
 
 import { Course } from '../core/entities/course';
 
@@ -66,6 +67,11 @@ export const routing = ($stateProvider: StateProvider) => {
         'ngInject';
         const id = $transition$.params().courseId;
         return coursesService.getCourse(id);
+      },
+
+      authors: function(authorsService: AuthorsService) {
+        'ngInject';
+        return authorsService.getAuthors();
       },
 
       title: function(course: Course) {

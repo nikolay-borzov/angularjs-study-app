@@ -5,6 +5,6 @@ export class Course {
   name: string;
   description: string;
   durationMinutes: number;
-  createData: Date;
-  authors: Author[];
+  date: Date;
+  authorIds: Array<number>;
 }

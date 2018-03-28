@@ -14,6 +14,8 @@
 
 /* Expand component container */
 courses-page,
+course-update-page,
+course-create-page,
 login-page {
   display: flex;
   flex-direction: column;
@@ -35,10 +37,14 @@ login-page {
   width: 100%;
 }
 
+loading-block {
+  display: flex;
+  flex-grow: 2;
+}
+
 .breadcrumbs-link:hover {
   text-decoration: underline;
 }
-
 
 .toolbar-input-container {
   margin: 0;
@@ -59,4 +65,11 @@ login-page {
 /* Fix icon color inside md-toolbar */
 .md-button md-icon {
   fill: currentColor !important;
+}
+
+.input-suffix {
+  /* Align with input */
+  line-height: 27px;
+  height: 30px;
+  padding: 2px 2px 2px 9px;
 }

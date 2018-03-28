@@ -73,5 +73,5 @@ class LoginWidgetController implements IEventSubscriber {
 export class LoginWidget implements ng.IComponentOptions {
   static selector = 'loginWidget';
   static controller = LoginWidgetController;
-  static template = require('./login-widget.component.html');
+  static template = require('./login-widget.template.html');
 }

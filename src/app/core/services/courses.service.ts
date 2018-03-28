@@ -27,9 +27,16 @@ export class CoursesService {
       .then(extractData);
   }
 
-  getCourse(id: number): ng.IPromise<Course> {
-    const url = `${this.apiUrl}/${id}`;
+  getCourse(id: number) {
     // TODO: handle not existing course
-    return this.$http.get<Course>(url).then(extractData);
+    return this.$http.get<Course>(this.getCourseApiUrl(id)).then(extractData);
+  }
+
+  updateCourse(course: Course) {
+    return this.$http.put<Course>(this.getCourseApiUrl(course.id), course);
+  }
+
+  private getCourseApiUrl(id: number) {
+    return `${this.apiUrl}/${id}`;
   }
 }
