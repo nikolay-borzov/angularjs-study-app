@@ -24,18 +24,20 @@
       </div>
     </md-input-container>
 
-    <md-input-container layout="row">
-      <div>
+    <div layout="row">
+      <md-input-container class="md-block" flex>
         <label>Duration</label>
         <input name="duration" ng-model="$ctrl.model.durationMinutes" required>
         <div ng-messages="form.duration.$error">
           <div ng-messages-include="error-messages-generic"></div>
         </div>
-      </div>
-      <div class="input-suffix" flex="grow">
-        {{ $ctrl.model.durationMinutes | duration }}
-      </div>
-    </md-input-container>
+      </md-input-container>
+      <md-input-container class="md-block" flex>
+        <div class="input-suffix">
+          {{ $ctrl.model.durationMinutes | duration }}
+        </div>
+      </md-input-container>
+    </div>
 
     <div>
       <md-button type="submit" ng-disabled="form.$invalid" class="md-raised md-primary">Save</md-button>
