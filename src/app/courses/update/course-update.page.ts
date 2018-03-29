@@ -20,7 +20,14 @@ class CourseUpdatePageController {
       .updateCourse(model)
       .then(() => {
         // TODO: Pass course id in order to highlight updated course
-        this.$state.go(States.Courses);
+        this.$state.go(
+          States.Courses,
+          {},
+          {
+            // https://github.com/angular-ui/ui-router/issues/3399
+            reload: true
+          }
+        );
       })
       .catch((error: any) => {
         // TODO: Handle error rightly

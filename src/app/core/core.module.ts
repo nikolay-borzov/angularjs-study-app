@@ -9,6 +9,9 @@ import { LoadingBlock } from './components/loading-block/loading-block.component
 import { Breadcrumbs } from './components/breadcrumbs/breadcrumbs.component';
 import { LoginWidget } from './components/login-widget/login-widget.component';
 
+// Directives
+import { dateInput } from './directives/date-input/date-input.directive';
+
 // Services
 import { AuthService } from './services/auth.service';
 import { CoursesService } from './services/courses.service';
@@ -24,6 +27,7 @@ import { routing } from './core.routes';
 // Configuration hooks
 import { authHook } from './config-hooks/auth.hook';
 import { pageDataHook } from './config-hooks/page-data.hook';
+import { httpProviderHook } from './config-hooks/http-provider.hook';
 
 // Run hooks
 import { cacheTemplatesHook } from './run-hooks/cache-templates.hook';
@@ -39,6 +43,8 @@ export default angular
   .component(Breadcrumbs.selector, Breadcrumbs)
   .component(LoginWidget.selector, LoginWidget)
   .component(App.selector, App)
+  // Directives
+  .directive('dateInput', dateInput)
   // Services
   .service(AuthService.selector, AuthService)
   .service(AuthorsService.selector, AuthorsService)
@@ -51,6 +57,7 @@ export default angular
   // Configuration hooks
   .config(authHook)
   .config(pageDataHook)
+  .config(httpProviderHook)
   // Run hooks
   .run(cacheTemplatesHook)
   .run(transitionLoadingIndicator).name;

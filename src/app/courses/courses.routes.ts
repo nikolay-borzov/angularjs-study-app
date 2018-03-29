@@ -26,11 +26,13 @@ export const routing = ($stateProvider: StateProvider) => {
         coursesService: CoursesService
       ) {
         'ngInject';
+
         const filter = $transition$.params().q;
         return coursesService.getCourses(filter);
       },
       filter: function($transition$: Transition) {
         'ngInject';
+
         return $transition$.params().q;
       }
     }
