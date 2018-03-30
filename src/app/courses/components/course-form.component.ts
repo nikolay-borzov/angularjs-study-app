@@ -37,7 +37,7 @@ class CourseFormController {
 }
 
 export class CourseForm implements ng.IComponentOptions {
-  static selctor = 'courseForm';
+  static selector = 'courseForm';
   static controller = CourseFormController;
   static template = require('./course-form.template.html');
   static bindings = {

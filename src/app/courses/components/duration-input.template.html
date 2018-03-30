@@ -1,0 +1,20 @@
+<div layout="row">
+  <md-input-container class="md-block" flex>
+    <label>{{ ::$ctrl.label }}</label>
+    <input name="{{ ::$ctrl.name }}"
+           type="number"
+           ng-model="$ctrl.value"
+           ng-change="$ctrl.onChange()"
+           ng-required="::$ctrl.required"
+           ng-disabled="::$ctrl.disabled">
+    <div ng-transclude="ng-messages"
+         ng-messages="$ctrl.ngFormCtrl[$ctrl.name].$error">
+      <div ng-messages-include="error-messages-generic"></div>
+    </div>
+  </md-input-container>
+  <md-input-container class="md-block" flex>
+    <div class="input-suffix">
+      {{ $ctrl.value | duration }}
+    </div>
+  </md-input-container>
+</div>
