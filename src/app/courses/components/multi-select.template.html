@@ -1,0 +1,50 @@
+<div layout="row" class="multi-select">
+  <!-- Selected -->
+  <md-input-container class="md-block md-input-has-placeholder" flex
+                      ng-class="{ 'md-input-invalid': $ctrl.isInvalid }">
+    <label ng-class="{ 'md-required': $ctrl.required }">
+      {{ $ctrl.label }}
+    </label>
+    <md-chips ng-model="$ctrl.selected" readonly="true"
+              md-removable="false">
+      <md-chip-template layout="row">
+        <div>
+          {{ $chip[$ctrl.nameKey] }}
+        </div>
+        <button ng-if="!$ctrl.disabled"
+                class="md-chip-remove multi-select__item-button multi-select__item-button--remove"
+                type="button" tabindex="-1"
+                ng-click="$ctrl.onRemove($chip[$ctrl.idKey])"
+                aria-label="Remove">
+          <md-icon md-svg-icon="close-circle"></md-icon>
+        </button>
+      </md-chip-template>
+    </md-chips>
+    <div ng-messages="$ctrl.ngFormCtrl[$ctrl.name].$error">
+      <div ng-messages-include="error-messages-generic"></div>
+    </div>
+  </md-input-container>
+  <!-- Available -->
+  <md-input-container class="md-block md-input-has-placeholder" flex>
+    <label>
+      {{ $ctrl.labelItems }}
+    </label>
+    <md-chips ng-model="$ctrl.available" md-removable="false" readonly="true">
+      <input type="text"/>
+      <md-chip-template layout="row" class="multi-select-item"
+        ng-class="{ 'multi-select__item--selected': $chip.selected }">
+        <div>
+          {{ $chip[$ctrl.nameKey] }}
+        </div>
+        <button ng-if="!$ctrl.disabled"
+                class="md-chip-remove multi-select__item-button multi-select__item-button--add"
+                type="button" tabindex="-1"
+                ng-click="$ctrl.onAdd($chip[$ctrl.idKey])"
+                ng-disabled="$chip.selected"
+                aria-label="Add">
+          <md-icon md-svg-icon="plus-circle"></md-icon>
+        </button>
+      </md-chip-template>
+    </md-chips>
+  </md-input-container>
+</div>

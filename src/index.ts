@@ -41,7 +41,9 @@ const bootstrapModuleName = angular
         .icon('edit', './assets/icons/edit.svg', 24)
         .icon('delete', './assets/icons/delete.svg', 24)
         .icon('chevron-right', './assets/icons/chevron-right.svg', 24)
-        .icon('exit', './assets/icons/exit.svg', 24);
+        .icon('exit', './assets/icons/exit.svg', 24)
+        .icon('plus-circle', './assets/icons/plus-circle.svg', 24)
+        .icon('close-circle', './assets/icons/close-circle.svg', 24);
 
       $mdThemingProvider
         .theme('default')

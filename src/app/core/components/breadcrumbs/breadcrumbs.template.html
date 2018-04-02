@@ -1,7 +1,7 @@
-<div layout="row">
-  <div ng-repeat="crumb in $ctrl.breadcrumbs track by crumb.title">
+<div  layout="row">
+  <div md-truncate  ng-repeat="crumb in $ctrl.breadcrumbs track by crumb.title">
     <a class="breadcrumbs-link" ng-if="!$last" href="{{::crumb.state}}">{{::crumb.title}}</a>
     <md-icon ng-if="!$last" md-svg-icon="chevron-right"></md-icon>
-    <span ng-if="$last">{{::crumb.title}}</span>
+    <span ng-if="$last" flex>{{::crumb.title}}</span>
   </div>
 </div>

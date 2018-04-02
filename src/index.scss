@@ -67,10 +67,77 @@ loading-block {
   fill: currentColor !important;
 }
 
+/* Custom inputs with label and validation */
+duration-input, 
+multi-select {
+  display: block;
+  margin: 18px 0;
+}
+
+duration-input md-input-container,
+multi-select md-input-container {
+  margin: 0;
+}
+
 .input-suffix {
   /* Align with input */
   line-height: 27px;
   height: 30px;
   padding: 2px 2px 2px 9px;
   box-sizing: border-box;
+}
+
+/* MULTI SELECT COMPONENT */
+
+// Take all available height within parent continer
+.multi-select md-input-container {
+  display: flex;
+  flex-direction: column;
+}
+.multi-select md-chips {
+  display: flex;
+  flex-grow: 2;
+}
+.multi-select md-chips-wrap {
+  flex-grow: 2;
+}
+
+// 
+.multi-select .md-chips md-chip .md-chip-content {
+  overflow: visible;
+}
+
+
+.multi-select__item {
+  transition: opacity ease 350ms;
+
+  &--selected {
+    opacity: 0.5;
+  } // .multi-select__item--selected
+}
+
+/* Item Button */
+
+/* Resore default color for disabled state */
+.multi-select__item-button {
+  // Move ti the right edge
+  margin-right: -12px !important;
+
+  // Enable icon coloring
+  &:hover > md-icon {
+    color: inherit;
+  }
+
+  // Reset color if disabled
+  &[disabled]:hover > md-icon {
+    color: rgb(97,97,97);
+  }
+
+  &--add:hover {
+    color: #388E3C;
+  } // .multi-select__item-button--add
+
+  &--remove:hover {
+    color:rgb(221,44,0);
+  } // .multi-select__item-button--remove
 }

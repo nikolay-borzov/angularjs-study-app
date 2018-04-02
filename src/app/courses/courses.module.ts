@@ -1,6 +1,7 @@
 import * as angular from 'angular';
 
 // Components
+import { MultiSelect } from './components/multi-select.component';
 import { DurationInput } from './components/duration-input.component';
 import { CourseForm } from './components/course-form.component';
 
@@ -15,6 +16,7 @@ import { routing } from './courses.routes';
 export default angular
   .module('app.courses', ['ui.router'])
   // Components
+  .component(MultiSelect.selector, MultiSelect)
   .component(DurationInput.selector, DurationInput)
   .component(CourseForm.selector, CourseForm)
   // Pages

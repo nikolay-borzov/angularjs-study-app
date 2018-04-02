@@ -24,11 +24,14 @@
       </div>
     </md-input-container>
 
-    <duration-input name="duration"
-                    label="Duration (minutes)"
+    <duration-input name="duration" label="Duration (minutes)"
                     ng-model="$ctrl.model.durationMinutes"
                     required>
     </duration-input>
+
+    <multi-select name="authors" label="Authors" label-items="Available Authors"
+                  ng-model="$ctrl.model.authorIds"
+                  items="$ctrl.authors" required></multi-select>
 
     <div>
       <md-button type="submit" ng-disabled="form.$invalid"
