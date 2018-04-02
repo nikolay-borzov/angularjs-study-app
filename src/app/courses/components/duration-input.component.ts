@@ -3,6 +3,11 @@ class DurationInputController {
 
   value: number;
 
+  validation = {
+    min: 15,
+    max: 600000
+  };
+
   $onInit() {
     this.ngModelCtrl.$formatters.push(this.formatValue);
 

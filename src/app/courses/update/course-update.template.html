@@ -1,3 +1,11 @@
-<loading-block is-loading="$ctrl.isLoading">
-  <course-form course="$ctrl.course" authors="$ctrl.authors" on-submit="$ctrl.save(model)" on-cancel="$ctrl.goBack()">
+<loading-block ng-if="$ctrl.courseExists" is-loading="$ctrl.isLoading">
+  <course-form course="$ctrl.course" authors="$ctrl.authors"
+               on-submit="$ctrl.save(model)" on-cancel="$ctrl.goBack()">
 </loading-block>
+<div ng-if="!$ctrl.courseExists" class="centered">
+  <div class="centered__content">
+    <md-icon md-svg-icon="skull" style="width: 70%; height: 70%;"></md-icon>
+    <p class="md-headline">Course not found. Redirecting to the courses page...</p>
+  </div>
+
+</div>

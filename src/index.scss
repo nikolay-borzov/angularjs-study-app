@@ -37,6 +37,17 @@ login-page {
   width: 100%;
 }
 
+.centered {
+  display: flex;
+  flex: 1 1 0;
+  align-items: center;
+  justify-content: center;
+
+  & > .centered__content {
+    text-align: center;
+  }
+}
+
 loading-block {
   display: flex;
   flex-grow: 2;

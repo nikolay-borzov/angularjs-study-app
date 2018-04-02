@@ -15,6 +15,14 @@ import { States } from '../core/enums/route-states';
 export const routing = ($stateProvider: StateProvider) => {
   'ngInject';
 
+  const resolvables = {
+    authors: function(authorsService: AuthorsService) {
+      'ngInject';
+      return authorsService.getAuthors();
+    }
+  };
+
+  // View list
   $stateProvider.state({
     name: States.Courses,
     url: '/courses?q',
@@ -38,6 +46,7 @@ export const routing = ($stateProvider: StateProvider) => {
     }
   });
 
+  // Create
   $stateProvider.state({
     name: States.CourseCreate,
     parent: States.Courses,
@@ -48,10 +57,13 @@ export const routing = ($stateProvider: StateProvider) => {
       }
     },
     resolve: {
+      authors: resolvables.authors,
+
       title: () => 'Create Course'
     }
   });
 
+  // Update
   $stateProvider.state({
     name: States.CourseUpdate,
     parent: States.Courses,
@@ -71,14 +83,10 @@ export const routing = ($stateProvider: StateProvider) => {
         return coursesService.getCourse(id);
       },
 
-      authors: function(authorsService: AuthorsService) {
-        'ngInject';
-        return authorsService.getAuthors();
-      },
+      authors: resolvables.authors,
 
       title: function(course: Course) {
-        'ngInject';
-        return `Edit "${course.name}"`;
+        return course ? `Edit "${course.name}"` : 'Not found';
       }
     }
   });

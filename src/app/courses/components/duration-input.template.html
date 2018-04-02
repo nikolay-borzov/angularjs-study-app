@@ -1,14 +1,14 @@
 <div layout="row">
   <md-input-container class="md-block" flex>
     <label>{{ ::$ctrl.label }}</label>
-    <input name="{{ ::$ctrl.name }}"
-           type="number"
+    <input name="{{ ::$ctrl.name }}" type="number"
+           min="{{ ::$ctrl.validation.min }}"
+           max="{{ ::$ctrl.validation.max }}"
            ng-model="$ctrl.value"
            ng-change="$ctrl.onChange()"
            ng-required="::$ctrl.required"
            ng-disabled="::$ctrl.disabled">
-    <div ng-transclude="ng-messages"
-         ng-messages="$ctrl.ngFormCtrl[$ctrl.name].$error">
+    <div ng-messages="$ctrl.ngFormCtrl[$ctrl.name].$error">
       <div ng-messages-include="error-messages-generic"></div>
     </div>
   </md-input-container>

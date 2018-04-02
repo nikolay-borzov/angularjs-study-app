@@ -28,8 +28,13 @@ export class CoursesService {
   }
 
   getCourse(id: number) {
-    // TODO: handle not existing course
-    return this.$http.get<Course>(this.getCourseApiUrl(id)).then(extractData);
+    return this.$http
+      .get<Course>(this.getCourseApiUrl(id))
+      .then(extractData)
+      .catch((error: any) => {
+        // TODO: handle not existing course - maybe httpProvider interceptor
+        console.log(error);
+      });
   }
 
   updateCourse(course: Course) {

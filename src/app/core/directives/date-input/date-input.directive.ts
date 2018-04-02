@@ -107,7 +107,7 @@ export function dateInput(
       // Format Date object to date string
       let format = function(value: Date) {
         // dd.MM.yyyy
-        return value.toLocaleDateString('ru-RU');
+        return value ? value.toLocaleDateString('ru-RU') : '';
       };
 
       // Validate Date

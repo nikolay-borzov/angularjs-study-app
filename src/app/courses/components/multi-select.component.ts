@@ -34,7 +34,7 @@ class MultiSelectController {
     this.available = this.$filter('orderBy')(this.items, this.nameKey);
 
     this.$timeout(() => {
-      let ids = self.ngModelCtrl.$viewValue;
+      let ids = self.ngModelCtrl.$viewValue || [];
 
       self.available.forEach((item: any) => {
         if (ids.includes(item[self.idKey])) {
@@ -43,7 +43,7 @@ class MultiSelectController {
         }
       });
 
-      this.validateModel();
+      // this.validateModel();
     }, 0);
   }
 
