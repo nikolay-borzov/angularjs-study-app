@@ -1,37 +1,25 @@
-import * as angular from 'angular';
 import { StateService } from '@uirouter/core';
 
-import { States } from '../../core/enums/route-states';
-import { Course } from '../../core/entities/course';
+import { CoursePageController } from '../course.controller';
 import { CoursesService } from '../../core/services/courses.service';
+import { Course } from '../../core/entities/course';
 
-class CourseUpdatePageController {
+class CourseUpdatePageController extends CoursePageController {
   course: Course;
 
   isLoading = false;
 
-  constructor(
-    private coursesService: CoursesService,
-    private $state: StateService
-  ) {
+  constructor(coursesService: CoursesService, $state: StateService) {
     'ngInject';
+
+    super(coursesService, $state);
   }
 
   save(model: Course) {
     this.isLoading = true;
     this.coursesService
       .updateCourse(model)
-      .then(() => {
-        // TODO: Pass course id in order to highlight updated course
-        this.$state.go(
-          States.Courses,
-          {},
-          {
-            // https://github.com/angular-ui/ui-router/issues/3399
-            reload: true
-          }
-        );
-      })
+      .then(this.afterSave)
       .catch((error: any) => {
         // TODO: Handle error rightly
         console.log('Error occured', error);
@@ -39,10 +27,6 @@ class CourseUpdatePageController {
       .finally(() => {
         this.isLoading = false;
       });
-  }
-
-  goBack() {
-    this.$state.go(States.Courses);
   }
 }
 

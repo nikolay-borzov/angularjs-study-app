@@ -7,13 +7,7 @@ class CourseFormController {
   course: Course;
   authors: Author[];
 
-  model = {
-    name: '',
-    description: '',
-    date: null,
-    durationMinutes: 0,
-    authorIds: Array<number>()
-  } as Course;
+  model: Course;
 
   // Events
   onSubmit: ($event: { model: Course }) => void;
@@ -24,7 +18,7 @@ class CourseFormController {
   }
 
   $onInit() {
-    this.model = this.course;
+    this.model = this.course || new Course();
   }
 
   submit() {

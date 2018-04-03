@@ -31,6 +31,10 @@ export class CoursesService {
     return this.$http.get<Course>(this.getCourseApiUrl(id)).then(extractData);
   }
 
+  createCourse(course: Course) {
+    return this.$http.post<Course>(this.apiUrl, course);
+  }
+
   updateCourse(course: Course) {
     return this.$http.put<Course>(this.getCourseApiUrl(course.id), course);
   }
