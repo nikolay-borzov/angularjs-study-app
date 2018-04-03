@@ -5,4 +5,9 @@ export function cacheTemplatesHook($templateCache: ng.ITemplateCacheService) {
     'error-messages-generic',
     require('../templates/common-error-messages.html')
   );
+
+  $templateCache.put(
+    'delete-dialog',
+    require('../dialogs/delete-dialog.template.html')
+  );
 }

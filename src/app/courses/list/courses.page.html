@@ -33,9 +33,10 @@
       <md-card-actions layout="column" layout-align="space-between" class="card-actions-vertical">
         <md-button ui-sref="course-update({ courseId: course.id })" class="md-raised md-primary">
           <md-icon md-svg-icon="edit"></md-icon> Edit</md-button>
-        <md-button class="md-warn">
+        <md-button class="md-warn" ng-click="$ctrl.deleteCourse($event)">
           <md-icon md-svg-icon="delete"></md-icon> Delete</md-button>
       </md-card-actions>
     </md-card>
   </md-content>
 </loading-block>
+

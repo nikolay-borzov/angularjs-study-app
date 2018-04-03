@@ -39,6 +39,10 @@ export class CoursesService {
     return this.$http.put<Course>(this.getCourseApiUrl(course.id), course);
   }
 
+  deleteCourse(id: number) {
+    return this.$http.delete<Course>(this.getCourseApiUrl(id));
+  }
+
   private getCourseApiUrl(id: number) {
     return `${this.apiUrl}/${id}`;
   }
