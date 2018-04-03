@@ -30,7 +30,7 @@
     "protractor": "protractor e2e-tests/tmp/protractor.conf.js"
   },
   "keywords": [
-    "study-app"
+    "study project"
   ],
   "author": "Nikolay Borzov <nikolay.n.borzov@gmail.com>",
   "license": "MIT",

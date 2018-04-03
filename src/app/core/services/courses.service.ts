@@ -28,13 +28,7 @@ export class CoursesService {
   }
 
   getCourse(id: number) {
-    return this.$http
-      .get<Course>(this.getCourseApiUrl(id))
-      .then(extractData)
-      .catch((error: any) => {
-        // TODO: handle not existing course - maybe httpProvider interceptor
-        console.log(error);
-      });
+    return this.$http.get<Course>(this.getCourseApiUrl(id)).then(extractData);
   }
 
   updateCourse(course: Course) {

@@ -9,26 +9,12 @@ class CourseUpdatePageController {
   course: Course;
 
   isLoading = false;
-  courseExists = false;
 
   constructor(
     private coursesService: CoursesService,
-    private $state: StateService,
-    private $timeout: ng.ITimeoutService
+    private $state: StateService
   ) {
     'ngInject';
-  }
-
-  $onInit() {
-    const self = this;
-
-    this.courseExists = angular.isDefined(this.course);
-
-    if (!this.courseExists) {
-      this.$timeout(() => {
-        self.$state.go(States.Courses);
-      }, 3000);
-    }
   }
 
   save(model: Course) {
@@ -60,7 +46,7 @@ class CourseUpdatePageController {
   }
 }
 
-export class CourseUpdatePage implements angular.IComponentOptions {
+export class CourseUpdatePage implements ng.IComponentOptions {
   static selector = 'courseUpdatePage';
   static controller = CourseUpdatePageController;
   static template = require('./course-update.template.html');

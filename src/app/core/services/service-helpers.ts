@@ -1,3 +1,3 @@
-export function extractData({ data }: ng.IHttpResponse<any>): any {
-  return data;
+export function extractData(response: ng.IHttpResponse<any>): any {
+  return response ? response.data : null;
 }
