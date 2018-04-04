@@ -39,8 +39,10 @@ export class CoursesService {
     return this.$http.put<Course>(this.getCourseApiUrl(course.id), course);
   }
 
-  deleteCourse(id: number) {
-    return this.$http.delete<Course>(this.getCourseApiUrl(id));
+  deleteCourse(id: number): ng.IPromise<Course[]> {
+    return this.$http.delete<Course>(this.getCourseApiUrl(id)).then(() => {
+      return this.getCourses(this.filterLastValue);
+    });
   }
 
   private getCourseApiUrl(id: number) {

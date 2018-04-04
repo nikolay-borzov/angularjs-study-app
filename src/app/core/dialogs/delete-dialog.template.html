@@ -1,13 +1,16 @@
 <md-dialog aria-label="Delete confrimation">
   <md-dialog-content>
-    Delete THE COURES?
+    <div class="md-dialog-content">
+      Delete
+      <strong>{{ $ctrl.entityName }}</strong>?
+    </div>
   </md-dialog-content>
   <md-dialog-actions layout="row">
-    <md-button>
+    <md-button ng-click="$ctrl.cancel()">
       Cancel
     </md-button>
     <span flex></span>
-    <md-button class="md-warn" md-autofocus>
+    <md-button class="md-warn" md-autofocus ng-click="$ctrl.confirm()">
       <md-icon md-svg-icon="delete"></md-icon> Delete</md-button>
     </md-card-actions>
   </md-dialog-actions>

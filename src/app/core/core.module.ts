@@ -28,6 +28,7 @@ import { routing } from './core.routes';
 import { authHook } from './config-hooks/auth.hook';
 import { pageDataHook } from './config-hooks/page-data.hook';
 import { httpProviderHook } from './config-hooks/http-provider.hook';
+import { dialogsHook } from './config-hooks/dialogs.hook';
 
 // Run hooks
 import { cacheTemplatesHook } from './run-hooks/cache-templates.hook';
@@ -58,6 +59,7 @@ export default angular
   .config(authHook)
   .config(pageDataHook)
   .config(httpProviderHook)
+  .config(dialogsHook)
   // Run hooks
   .run(cacheTemplatesHook)
   .run(transitionLoadingIndicator).name;
