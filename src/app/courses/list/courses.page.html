@@ -18,10 +18,10 @@
 <loading-block is-loading="$ctrl.isLoading">
   <div ng-show="$ctrl.courses.length === 0" class="centered">
     <div class="centered__content md-title">
-      <p ng-show="$ctrl.filter.length > 0">
+      <p ng-show="$ctrl.filter">
         No courses found
       </p>
-      <p ng-show="$ctrl.filter.length === 0">
+      <p ng-hide="$ctrl.filter">
         There are no courses
       </p>
     </div>
@@ -34,9 +34,9 @@
           <md-card-title-text layout="row" layout-align="space-between">
             <div>
               <span class="md-headline inline-text-block">{{ course.name }}</span>
-              <span class="md-headline inline-text-block">{{ course.durationMinutes | duration }}</span>
+              <span class="md-title inline-text-block">{{ course.durationMinutes | duration }}</span>
             </div>
-            <span class="md-headline inline-text-block">{{ course.date | date:"dd.MM.yyyy" }}</span>
+            <span class="md-title inline-text-block">{{ course.date | date:"dd.MM.yyyy" }}</span>
           </md-card-title-text>
         </md-card-title>
         <md-card-content>

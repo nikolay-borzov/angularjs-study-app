@@ -4,6 +4,7 @@ const ROOT = path.resolve(__dirname, 'src');
 
 // Webpack Plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -66,6 +67,23 @@ module.exports = {
       title: 'AngularJS Study App',
       template: 'index.html',
       inject: true
+    }),
+    new FaviconsWebpackPlugin({
+      logo: path.join(ROOT, 'app/assets/favicon.png'),
+      emitStats: false,
+      background: '#2d89ef',
+      icons: {
+        android: true,
+        appleIcon: false,
+        appleStartup: false,
+        coast: false,
+        favicons: true,
+        firefox: true,
+        opengraph: false,
+        twitter: false,
+        yandex: false,
+        windows: false
+      }
     }),
     new LoaderOptionsPlugin({
       debug: true,
