@@ -23,11 +23,11 @@ describe('LoginForm component', () => {
     })
   );
 
-  it('should exist', () => {
+  it('exists', () => {
     expect(ctrl).toBeDefined();
   });
 
-  it('it should call `onSubmit` binding on form submit', () => {
+  it('calls `onSubmit` binding on form submit', () => {
     const model = { login: 'user', password: 'pass' };
     ctrl.model = model;
 
@@ -36,13 +36,13 @@ describe('LoginForm component', () => {
     expect(bindings.onSubmit).toHaveBeenCalledWith({ model: model });
   });
 
-  it('should call `onLogout` binding on sign out', () => {
+  it('calls `onLogout` binding on sign out', () => {
     ctrl.logOut();
 
     expect(bindings.onLogOut).toHaveBeenCalled();
   });
 
-  it('should clear password field when `errorText` is set', () => {
+  it('clears password field when `errorText` is set', () => {
     const model = { login: 'user', password: 'pass' };
     ctrl.model = model;
 
@@ -50,5 +50,14 @@ describe('LoginForm component', () => {
     ctrl.$onChanges();
 
     expect(ctrl.model.password).toBe('');
+  });
+
+  it("doesn't clear password field when `errorText` isn't set", () => {
+    const model = { login: 'user', password: 'pass' };
+    ctrl.model = model;
+
+    ctrl.$onChanges();
+
+    expect(ctrl.model.password).toBe(model.password);
   });
 });

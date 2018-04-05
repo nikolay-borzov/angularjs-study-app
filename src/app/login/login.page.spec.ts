@@ -1,10 +1,11 @@
 import * as angular from 'angular';
 import 'angular-mocks';
+import { StateDeclaration, RawParams, TransitionOptions } from '@uirouter/core';
 
 import { LoginPage } from './login.page';
 import { AuthService } from '../core/services/auth.service';
 
-describe('LoginPage', () => {
+fdescribe('LoginPage', () => {
   let ctrl: any;
 
   let $q: ng.IQService;
@@ -12,6 +13,10 @@ describe('LoginPage', () => {
 
   let authService = jasmine.createSpyObj('authService', ['logIn', 'logOut']);
   let $state = jasmine.createSpyObj('$state', ['go', 'reload']);
+
+  const bindings = {
+    returnTo: jasmine.createSpyObj('returnTo', ['state', 'params', 'options'])
+  };
 
   beforeEach(() => {
     angular.module('app', []).component(LoginPage.selector, LoginPage);
@@ -29,15 +34,19 @@ describe('LoginPage', () => {
         $q = _$q_;
         $rootScope = _$rootScope_;
 
-        ctrl = $componentController(LoginPage.selector, {
-          authService,
-          $state
-        });
+        ctrl = $componentController(
+          LoginPage.selector,
+          {
+            authService,
+            $state
+          },
+          bindings
+        );
       }
     )
   );
 
-  it('should exist', () => {
+  it('exists', () => {
     expect(ctrl).toBeDefined();
   });
 
@@ -46,7 +55,7 @@ describe('LoginPage', () => {
       authService.logIn.and.returnValue($q.resolve());
     });
 
-    it('should call `authService.logIn`', () => {
+    it('calls `authService.logIn`', () => {
       const params = { login: 'login', password: 'passsword' };
 
       ctrl.logIn(params);
@@ -57,14 +66,24 @@ describe('LoginPage', () => {
       );
     });
 
-    it('should redirect to courses on success', () => {
+    it('redirects to state specified in `returnTo` on success', () => {
+      let state = {
+        name: 'someState'
+      } as StateDeclaration;
+      let params = {} as RawParams;
+      let options = { reload: false } as TransitionOptions;
+
+      bindings.returnTo.state.and.returnValue(state);
+      bindings.returnTo.params.and.returnValue(params);
+      bindings.returnTo.options.and.returnValue(options);
+
       ctrl.logIn({ login: 'login' });
       $rootScope.$apply();
 
-      expect($state.go).toHaveBeenCalledWith('courses');
+      expect($state.go).toHaveBeenCalledWith(state, params, { reload: true });
     });
 
-    it('should set `loginError` on fail ', () => {
+    it('sets `loginError` on fail ', () => {
       authService.logIn.and.returnValue($q.reject());
 
       ctrl.logIn({ login: 'wronglogin' });
@@ -80,13 +99,13 @@ describe('LoginPage', () => {
       authService.logOut.and.returnValue($q.resolve());
     });
 
-    it('should call `authService.logOut`', () => {
+    it('calls `authService.logOut`', () => {
       ctrl.logOut();
 
       expect(authService.logOut).toHaveBeenCalled();
     });
 
-    it('should reload page', () => {
+    it('reloads page', () => {
       ctrl.logOut();
       $rootScope.$apply();
 
