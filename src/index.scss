@@ -78,6 +78,15 @@ loading-block {
   padding-right: 18px;
 }
 
+/* INPUT BUTTON */
+.input-container-button {
+  margin-left: -36px; 
+
+  & > .md-button {
+    margin: 0;
+  }
+}
+
 /* Fix icon color inside md-toolbar */
 .md-button md-icon {
   fill: currentColor !important;
@@ -88,11 +97,10 @@ duration-input,
 multi-select {
   display: block;
   margin: 18px 0;
-}
 
-duration-input md-input-container,
-multi-select md-input-container {
-  margin: 0;
+  & md-input-container {
+    margin: 0;
+  }
 }
 
 .input-suffix {

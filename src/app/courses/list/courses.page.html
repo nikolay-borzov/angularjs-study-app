@@ -8,6 +8,13 @@
                ng-model-options="$ctrl.filterModelOptions"
                ng-change="$ctrl.onFilterChange()">
       </md-input-container>
+
+      <md-input-container class="input-container-button" ng-if="$ctrl.filter">
+        <md-button class="md-icon-button" aria-label="Clear filter"
+                   ng-click="$ctrl.clearFilter()">
+          <md-icon md-svg-icon="clear"></md-icon>
+        </md-button>
+      </md-input-container>
     </form>
 
     <md-button ui-sref="course-create">
@@ -18,16 +25,16 @@
 <loading-block is-loading="$ctrl.isLoading">
   <div ng-show="$ctrl.courses.length === 0" class="centered">
     <div class="centered__content md-title">
-      <p ng-show="$ctrl.filter">
+      <p ng-if="$ctrl.filter">
         No courses found
       </p>
-      <p ng-hide="$ctrl.filter">
+      <p ng-if="!$ctrl.filter">
         There are no courses
       </p>
     </div>
   </div>
 
-  <md-content ng-show="$ctrl.courses.length > 0" flex="grow" layout-padding>
+  <md-content ng-if="$ctrl.courses.length > 0" flex="grow" layout-padding>
     <md-card ng-repeat="course in $ctrl.courses" layout="row">
       <div flex="grow">
         <md-card-title>

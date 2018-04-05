@@ -44,6 +44,7 @@ const bootstrapModuleName = angular
         .icon('exit', './assets/icons/exit.svg', 24)
         .icon('plus-circle', './assets/icons/plus-circle.svg', 24)
         .icon('close-circle', './assets/icons/close-circle.svg', 24)
+        .icon('clear', './assets/icons/clear.svg', 24)
         .icon('skull', './assets/icons/skull.svg', 24);
 
       $mdThemingProvider

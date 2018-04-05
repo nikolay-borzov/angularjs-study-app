@@ -43,6 +43,11 @@ class CoursesPageController {
       .catch(angular.noop);
   }
 
+  clearFilter() {
+    this.filter = '';
+    this.onFilterChange();
+  }
+
   onFilterChange() {
     this.isLoading = true;
     this.coursesService
