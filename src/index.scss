@@ -6,7 +6,7 @@
 
 /**
  * Global styles go here
-**/
+ **/
 
 #app-container {
   height: 100%;
@@ -52,6 +52,10 @@ login-page {
 loading-block {
   display: flex;
   flex-grow: 2;
+}
+
+.loading-block__content {
+  display: flex;
 }
 
 .breadcrumbs-link:hover {

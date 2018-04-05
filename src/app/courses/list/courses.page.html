@@ -3,7 +3,10 @@
     <form name="filterForm">
       <md-input-container md-no-float class="toolbar-input-container md-primary md-hue-3">
         <md-icon md-svg-icon="filter"></md-icon>
-        <input name="filter" placeholder="filter by name" ng-model="$ctrl.filter" ng-model-options="$ctrl.filterModelOptions" ng-change="$ctrl.onFilterChange()">
+        <input name="filter" placeholder="filter by name"
+               ng-model="$ctrl.filter"
+               ng-model-options="$ctrl.filterModelOptions"
+               ng-change="$ctrl.onFilterChange()">
       </md-input-container>
     </form>
 
@@ -13,7 +16,18 @@
 </md-toolbar>
 
 <loading-block is-loading="$ctrl.isLoading">
-  <md-content layout-padding>
+  <div ng-show="$ctrl.courses.length === 0" class="centered">
+    <div class="centered__content md-title">
+      <p ng-show="$ctrl.filter.length > 0">
+        No courses found
+      </p>
+      <p ng-show="$ctrl.filter.length === 0">
+        There are no courses
+      </p>
+    </div>
+  </div>
+
+  <md-content ng-show="$ctrl.courses.length > 0" flex="grow" layout-padding>
     <md-card ng-repeat="course in $ctrl.courses" layout="row">
       <div flex="grow">
         <md-card-title>
@@ -39,4 +53,3 @@
     </md-card>
   </md-content>
 </loading-block>
-

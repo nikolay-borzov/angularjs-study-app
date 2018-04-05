@@ -1,12 +1,12 @@
+import * as angular from 'angular';
+
 import { CoursesService } from '../../core/services/courses.service';
 import { Course } from '../../core/entities/course';
-
-import { showDeleteDialog } from '../../core/dialogs/delete-dialog';
 
 class CoursesPageController {
   courses: Course[];
 
-  filter: string;
+  filter = '';
 
   filterModelOptions = {
     debounce: 450
@@ -22,9 +22,13 @@ class CoursesPageController {
   }
 
   deleteCourse(event: MouseEvent, course: Course) {
-    // showDeleteDialog(this.$mdDialog, event, course.name)
+    const config = this.$mdDialog
+      .delete()
+      .targetEvent(event)
+      .entityName(course.name);
+
     this.$mdDialog
-      .show(this.$mdDialog.delete(event, course.name))
+      .show(config)
       .then(() => {
         this.isLoading = true;
         this.coursesService
@@ -36,9 +40,7 @@ class CoursesPageController {
             this.isLoading = false;
           });
       })
-      .catch(() => {
-        'Ku';
-      });
+      .catch(angular.noop);
   }
 
   onFilterChange() {
