@@ -1,4 +1,4 @@
-import { Transition } from '@uirouter/core';
+import { Transition, StateService } from '@uirouter/core';
 import { StateProvider } from '@uirouter/angularjs';
 
 import { LoginPage } from './login.page';
@@ -22,15 +22,13 @@ export const routing = ($stateProvider: StateProvider) => {
         return authService.getLoggedUser();
       },
       // Set state to return to after log in
-      returnTo: function($transition$: Transition) {
+      returnTo: function($transition$: Transition, $state: StateService) {
         'ngInject';
 
         // If redirected from authHook return to the original state
         if ($transition$.redirectedFrom() != null) {
           return $transition$.redirectedFrom().targetState();
         }
-
-        const $state = $transition$.router.stateService;
 
         // When directly activated return to the original state
         if ($transition$.from().name !== '') {

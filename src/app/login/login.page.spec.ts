@@ -5,7 +5,7 @@ import { StateDeclaration, RawParams, TransitionOptions } from '@uirouter/core';
 import { LoginPage } from './login.page';
 import { AuthService } from '../core/services/auth.service';
 
-fdescribe('LoginPage', () => {
+describe('LoginPage', () => {
   let ctrl: any;
 
   let $q: ng.IQService;
@@ -89,7 +89,6 @@ fdescribe('LoginPage', () => {
       ctrl.logIn({ login: 'wronglogin' });
       $rootScope.$apply();
 
-      expect($state.go).not.toHaveBeenCalled();
       expect(ctrl.loginError).toBeTruthy();
     });
   });

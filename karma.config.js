@@ -1,5 +1,5 @@
 module.exports = function(config) {
-  var browsers = ['PhantomJS'];
+  var browsers = ['ChromeHeadless'];
 
   /* TODO: uncomment later
   if (process.env.TRAVIS) {
