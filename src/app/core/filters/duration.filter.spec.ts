@@ -1,4 +1,6 @@
 import * as angular from 'angular';
+import 'angular-mocks';
+
 import filter from './duration.filter';
 
 describe('duration filter', () => {
@@ -11,7 +13,7 @@ describe('duration filter', () => {
   });
 
   beforeEach(() =>
-    angular.mock.inject(($filter: ng.IFilterService) => {
+    inject(($filter: ng.IFilterService) => {
       durationFilter = $filter(filter.selector);
     })
   );

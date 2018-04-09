@@ -12,7 +12,7 @@ export function goToUrlFactory(
         $location.url(url);
         $rootScope.$digest();
       }
-    : function(url: string) {
+    : function(url?: string) {
         $location.url(url);
         $rootScope.$digest();
       };
@@ -36,3 +36,22 @@ export function getResolvableFactory($state: StateService) {
     return getResolvableFunc($state, value);
   };
 }
+
+export const specs = {
+  hasTitle(getParams: () => { goTo: Function; resolve: Function }) {
+    describe('', () => {
+      let goTo: Function;
+      let resolve: Function;
+
+      beforeEach(() => {
+        ({ goTo, resolve } = getParams());
+      });
+
+      it('sets page title', () => {
+        goTo();
+
+        expect(resolve('title')).toBeDefined();
+      });
+    });
+  }
+};

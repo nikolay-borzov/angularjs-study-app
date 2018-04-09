@@ -25,7 +25,7 @@ describe('LoginPage', () => {
   });
 
   beforeEach(() =>
-    angular.mock.inject(
+    inject(
       (
         $componentController: ng.IControllerService,
         _$q_: ng.IQService,

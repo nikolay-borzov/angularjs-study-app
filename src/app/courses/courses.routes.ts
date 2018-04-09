@@ -86,7 +86,7 @@ export const routing = ($stateProvider: StateProvider) => {
       authors: resolvables.authors,
 
       title: function(course: Course) {
-        return course ? `Edit "${course.name}"` : 'Not found';
+        return `Edit "${course.name}"`;
       }
     }
   });

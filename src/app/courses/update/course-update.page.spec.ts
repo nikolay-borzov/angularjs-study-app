@@ -15,7 +15,7 @@ describe('CourseCreatePage', () => {
   });
 
   beforeEach(() =>
-    angular.mock.inject(($componentController: any) => {
+    inject(($componentController: any) => {
       ctrl = $componentController(CourseUpdatePage.selector);
     })
   );

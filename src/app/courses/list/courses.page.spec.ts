@@ -13,7 +13,7 @@ describe('CoursesPage', () => {
   });
 
   beforeEach(() =>
-    angular.mock.inject(($componentController: any) => {
+    inject(($componentController: any) => {
       ctrl = $componentController(CoursesPage.selector);
     })
   );

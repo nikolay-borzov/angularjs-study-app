@@ -44,6 +44,7 @@
     "@types/jasminewd2": "^2.0.3",
     "@types/node": "^9.3.0",
     "@types/webpack-env": "^1.13.3",
+    "ajv": "^6.0.0",
     "angular-animate": "^1.6.9",
     "angular-aria": "^1.6.9",
     "angular-material": "^1.1.7",
