@@ -9,7 +9,10 @@ import {
   specs
 } from '../../tests/route-helpers';
 
-fdescribe('courses routes', () => {
+import { Course } from '../core/entities/course';
+import { Author } from '../core/entities/author';
+
+describe('courses routes', () => {
   let $state: StateService;
   let $location: ng.ILocationService;
   let $rootScope: ng.IRootScopeService;
@@ -22,10 +25,13 @@ fdescribe('courses routes', () => {
   ]);
   let $transition$ = jasmine.createSpyObj('$transition$', ['params']);
 
+  const course = { name: 'Some course' } as Course;
+
   function mockServices($provide: ng.auto.IProvideService) {
     $provide.factory('$transition$', () => $transition$);
     $provide.factory('authorsService', () => authorsService);
     $provide.factory('coursesService', () => coursesService);
+    $provide.factory('course', () => course);
   }
 
   let resolve: Function;
@@ -56,50 +62,86 @@ fdescribe('courses routes', () => {
 
   describe('list', () => {
     let goToListPage: Function;
+    let query = 'query';
 
     beforeEach(() => {
       goToListPage = goToUrlFactory($location, $rootScope, '/courses');
+      $transition$.params.and.returnValue({ q: query });
     });
 
-    it('navigates to `courses` state', () => {
+    specs.navigatesToState('courses', () => ({ goTo: goToListPage, $state }));
+
+    specs.setsTitle(() => ({ goTo: goToListPage, resolve }));
+
+    it('requests courses', () => {
+      const courses = [new Course()];
+      coursesService.getCourses.and.returnValue(courses);
+
       goToListPage();
 
-      expect($state.current.name).toBe('courses');
+      expect(resolve('courses')).toBe(courses);
+      expect(coursesService.getCourses).toHaveBeenCalledWith(query);
     });
 
-    specs.hasTitle(() => ({ goTo: goToListPage, resolve }));
+    it(`sets 'filter' from tansition params`, () => {
+      goToListPage();
+
+      expect(resolve('filter')).toBe(query);
+    });
   });
 
-  fdescribe('create', function() {
+  describe('create', () => {
     let goToCreatePage: Function;
 
     beforeEach(function() {
       goToCreatePage = goToUrlFactory($location, $rootScope, '/courses/new');
     });
 
-    it('navigates to `course-create` state', () => {
+    specs.navigatesToState('course-create', () => ({
+      goTo: goToCreatePage,
+      $state
+    }));
+
+    specs.setsTitle(() => ({ goTo: goToCreatePage, resolve }));
+
+    it(`requests authors`, () => {
+      const authors = [new Author()];
+      authorsService.getAuthors.and.returnValue(authors);
+
       goToCreatePage();
 
-      expect($state.current.name).toBe('course-create');
+      expect(resolve('authors')).toBe(authors);
     });
-
-    specs.hasTitle(() => ({ goTo: goToCreatePage, resolve }));
   });
 
-  // TODO: Mock course loading
-  xdescribe('update', () => {
+  describe('update', () => {
     let goToUpdatePage: Function;
+    const courseId = 1;
 
     beforeEach(() => {
-      goToUpdatePage = goToUrlFactory($location, $rootScope, '/courses/1');
+      goToUpdatePage = goToUrlFactory(
+        $location,
+        $rootScope,
+        `/courses/${courseId}`
+      );
+      $transition$.params.and.returnValue({ courseId });
+      coursesService.getCourse.and.returnValue(course);
     });
 
-    it('navigates to `course-update` state', () => {
+    specs.navigatesToState('course-update', () => ({
+      goTo: goToUpdatePage,
+      $state
+    }));
+
+    specs.setsTitle(() => ({ goTo: goToUpdatePage, resolve }), course.name);
+
+    it('requests course by id', () => {
+      coursesService.getCourse.and.returnValue(course);
+
       goToUpdatePage();
 
-      expect($state.current.name).toBe('course-update');
+      expect(resolve('course')).toBe(course);
+      expect(coursesService.getCourse).toHaveBeenCalledWith(courseId);
     });
-
-    specs.hasTitle(() => ({ goTo: goToUpdatePage, resolve }));
   });
 });

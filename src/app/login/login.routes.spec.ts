@@ -5,7 +5,8 @@ import '../../tests/route-core';
 import {
   goToUrlFactory,
   resolveFactory,
-  getResolvableFactory
+  getResolvableFactory,
+  specs
 } from '../../tests/route-helpers';
 
 describe('login route', () => {
@@ -54,11 +55,9 @@ describe('login route', () => {
     )
   );
 
-  it('navigates to `login` state', () => {
-    goToLoginPage();
+  specs.navigatesToState('login', () => ({ goTo: goToLoginPage, $state }));
 
-    expect($state.current.name).toBe('login');
-  });
+  specs.setsTitle(() => ({ goTo: goToLoginPage, resolve }));
 
   it('requests logged user', () => {
     const user = { name: 'John Doe' };
@@ -69,12 +68,6 @@ describe('login route', () => {
     expect(getResolvable('loggedAs')).toBeDefined();
     expect(authService.getLoggedUser).toHaveBeenCalled();
     expect(resolve('loggedAs')).toBe(user);
-  });
-
-  it('sets page title', () => {
-    goToLoginPage();
-
-    expect(resolve('title')).toBeDefined();
   });
 
   describe('resolveTo', () => {
