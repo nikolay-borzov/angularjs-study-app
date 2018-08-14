@@ -3,8 +3,13 @@ import 'angular-mocks';
 
 import { CourseUpdatePage } from './course-update.page';
 
-describe('CourseCreatePage', () => {
+describe('CourseUpdatePage', () => {
   let ctrl: any;
+
+  const coursesService = jasmine.createSpyObj('coursesService', [
+    'createCourse'
+  ]);
+  const $state = jasmine.createSpyObj('$state', ['go']);
 
   beforeEach(() => {
     angular
@@ -16,9 +21,11 @@ describe('CourseCreatePage', () => {
 
   beforeEach(() =>
     inject(($componentController: any) => {
-      ctrl = $componentController(CourseUpdatePage.selector);
-    })
-  );
+      ctrl = $componentController(CourseUpdatePage.selector, {
+        coursesService,
+        $state
+      });
+    }));
 
   it('should exist', () => {
     expect(ctrl).toBeDefined();

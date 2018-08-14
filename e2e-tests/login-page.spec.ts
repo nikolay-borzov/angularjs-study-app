@@ -1,4 +1,4 @@
-import { browser, element, by } from 'protractor';
+import { browser } from 'protractor';
 import './extensions/element-finder';
 
 // Angular E2E Testing Guide: https://docs.angularjs.org/guide/e2e-testing
@@ -6,13 +6,23 @@ import './extensions/element-finder';
 import { po } from './page-objects/login';
 
 describe('Login page', () => {
-  beforeEach(po.get);
+  beforeEach(async (done: DoneFn) => {
+    await po.get();
+
+    // Log out if necessary
+    const isPresent = await po.logOutButton.isPresent();
+    if (isPresent) {
+      return po.logOut().then(done);
+    } else {
+      done();
+    }
+  });
 
   it('should render Login page', () => {
     expect(po.page.isPresent()).toBeTruthy();
   });
 
-  describe('Login from', () => {
+  describe('Login form', () => {
     it('should render Login form', () => {
       expect(po.form.isPresent()).toBeTruthy();
     });
@@ -46,16 +56,16 @@ describe('Login page', () => {
       expect(po.errorMessage.isPresent()).toBeTruthy();
     });
 
-    it('should redirect to courses page after successfull login', () => {
+    it('should redirect to courses page after successful login', () => {
       po.setLogin('q');
       po.setPassword('q');
 
       po.submitForm();
 
       return browser.driver.wait(() => {
-        return browser.driver.getCurrentUrl().then((url: string) => {
-          return url.endsWith('/courses');
-        });
+        return browser.driver
+          .getCurrentUrl()
+          .then((url: string) => url.endsWith('/courses'));
       }, 10000);
     });
 

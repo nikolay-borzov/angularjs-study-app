@@ -1,5 +1,5 @@
 import * as angular from 'angular';
-import { TargetState, StateService } from '@uirouter/angularjs';
+import { StateService } from '@uirouter/angularjs';
 
 import '../../tests/route-core';
 import {
@@ -41,24 +41,20 @@ describe('courses routes', () => {
     angular.mock.module('app.courses', mockServices);
   });
 
-  beforeEach(
-    inject(
-      (
-        _$state_: StateService,
-        _$location_: ng.ILocationService,
-        _$rootScope_: ng.IRootScopeService,
-        _$injector_: ng.auto.IInjectorService
-      ) => {
-        $state = _$state_;
-        $location = _$location_;
-        $rootScope = _$rootScope_;
-        $injector = _$injector_;
+  beforeEach(inject((
+    _$state_: StateService,
+    _$location_: ng.ILocationService,
+    _$rootScope_: ng.IRootScopeService,
+    _$injector_: ng.auto.IInjectorService
+  ) => {
+    $state = _$state_;
+    $location = _$location_;
+    $rootScope = _$rootScope_;
+    $injector = _$injector_;
 
-        resolve = resolveFactory($state, $injector);
-        getResolvable = getResolvableFactory($state);
-      }
-    )
-  );
+    resolve = resolveFactory($state, $injector);
+    getResolvable = getResolvableFactory($state);
+  }));
 
   describe('list', () => {
     let goToListPage: Function;
@@ -83,7 +79,7 @@ describe('courses routes', () => {
       expect(coursesService.getCourses).toHaveBeenCalledWith(query);
     });
 
-    it(`sets 'filter' from tansition params`, () => {
+    it(`sets 'filter' from transition params`, () => {
       goToListPage();
 
       expect(resolve('filter')).toBe(query);
